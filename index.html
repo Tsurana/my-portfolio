@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="#about">自己紹介</a></li>
+            <li><a href="#works">制作物一覧</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    </header>
+    <main>
+        <p>＊このサイトは誰にも見られないものと考えており趣味を適当に発信しているだけです。</p>
+    <section id="about">
+        <h2>自己紹介</h2>
+        <p>初めまして<span id="greeting">こんにちは</span>たけしです。大学2年生をしています！<br>趣味はスマブラです。よろしくお願いします！</p><!-- ここ時間帯によってこんにちはとかおはようございますとか帰れたら面白いかもな-->
+    </section>
+
+    <section id="works">
+    <h2>制作物一覧</h2>
+
+    <div class="works-group">
+        <h3>Programming</h3>
+        <div class="works-container">
+            <div class="work-item">
+                <img src="https://via.placeholder.com/300x200" alt="プログラミング作品1">
+                <p>制作課題（準備中）</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="works-group">
+        <h3>Illustrations</h3>
+        <div class="works-container illustration-gallery">
+            <div class="work-item" onclick="openModal('images/239_20230131191002.png')">
+            <img src="images/239_20230131191002.png" alt="イラスト1">
+        </div>
+        <div class="work-item" onclick="openModal('images/pekora.png')">
+            <img src="images/pekora.png" alt="イラスト2">
+        </div>
+        </div>
+    </div>
+    </section>
+    <section id="contact">
+    <h2>お問い合わせ</h2>
+    <p>お気軽に連絡してください！</p>
+    <div class="contact-links">
+        <a href="https://x.com/Legendary_jaw_" class="contact-button">Twitter (X)</a>
+    </div>
+    </section>
+    </main>
+    <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="fullImage">
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

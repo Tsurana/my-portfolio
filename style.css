@@ -1,0 +1,156 @@
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    display: flex;       /* 横に並べる魔法 */
+    list-style: none;    /* 黒丸を消す */
+    background-color: #0032d4; /* 任天堂風の赤 */
+    padding: 20px 0;
+    justify-content: space-around; /* 均等配置 */
+    margin: 0;           /* デフォルトの余白を消す */
+}
+html {
+    scroll-behavior: smooth;
+}
+a {
+    color: rgb(131, 131, 131);        /* 文字を白く */
+    text-decoration: none; /* 下線を消す */
+    /* 3. 文字を大きく、太くする */
+    font-size: 1.2rem;   /* 標準より少し大きく */
+    font-weight: bold;   /* 太字にする */
+}
+
+/* マウスを乗せた（ホバーした）ときの色の設定 */
+a:hover {
+    color: #ffffff; /* 例えばゴールドのような色に変える */
+    text-decoration: underline; /* 下線を出してみる */
+    transition: 0.3s; /* 0.3秒かけてふわっと変える */
+}
+
+/* クリックした瞬間の色の設定 */
+a:active {
+    color: #ff0000; /* 一瞬だけ赤くする */
+}
+
+main {
+    padding: 40px; /* 上下左右に 40px の余白を作る */
+    max-width: 900px; /* 文章が横に広がりすぎないように制限する（企業サイト風） */
+    margin: 0 auto;  /* 幅を制限したときに、中身を中央に寄せる */
+}
+
+/* 作品グループごとの設定 */
+.works-group {
+    margin-bottom: 40px;
+}
+
+/* 作品を並べる箱の設定 */
+.works-container {
+    display: flex;
+    flex-wrap: wrap; /* 画面端まできたら自動で折り返す */
+    gap: 20px;       /* 作品同士の隙間 */
+}
+
+/* 1つ1つの作品の設定 */
+.work-item img {
+    width: 100%;     /* 親の箱の幅に合わせる */
+    max-width: 300px;
+    border-radius: 8px; /* 角を少し丸くすると今風になります */
+    border: 1px solid #ddd;
+}
+
+/* イラストを並べる箱の設定 */
+.illustration-gallery {
+    display: flex;       /* 横並びにする魔法 */
+    flex-wrap: wrap;     /* 画面端までいったら折り返す */
+    gap: 15px;           /* 画像と画像の間の隙間 */
+}
+
+/* 画像自体のサイズを整える */
+.illustration-gallery img {
+    width: 200px;        /* 横幅を固定 */
+    height: 200px;       /* 縦幅を固定 */
+    object-fit: cover;   /* 画像を歪ませずに正方形に切り抜く（pixiv風！） */
+    border-radius: 4px;  /* 少しだけ角を丸くする */
+}
+
+#contact {
+    text-align: center; /* 中身を中央に寄せる */
+    padding: 30px 0;
+}
+
+.contact-links {
+    margin-top: 10px;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #0032d4; /* メニューと同じ青色 */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px; /* 角を丸くしてボタンらしく */
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.contact-button:hover {
+    background-color: #0026a1; /* 少し濃い青にして変化をつける */
+    transform: scale(1.1);    /* 少し大きくする */
+}
+
+/* イラストの1枚ずつの箱 */
+.illustration-gallery .work-item {
+    width: calc(50% - 10px); /* 50%から隙間分を引いた幅 */
+}
+
+.illustration-gallery .work-item img {
+    width: 100%;  /* 箱の幅いっぱいに広げる */
+    height: auto; /* 高さは自動調整 */
+    aspect-ratio: 1 / 1; /* 正方形を維持 */
+}
+
+/* モーダル全体の背景（最初は非表示） */
+.modal {
+    display: flex;         /* 中身を真ん中に寄せやすくする */
+    visibility: hidden;    /* 存在はするが見えない、クリックもできない状態 */
+    opacity: 0;            /* 透明度 0（完全に透明） */
+    
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* 黒い半透明 */
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 2. ここを付け足す：表示するための「合図」用クラス */
+.modal.is-show {
+    visibility: visible;
+    opacity: 1;           /* 透明度を1にして見えるようにする */
+}
+/* 大きく表示される画像 */
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    margin-top: 5%;
+}
+
+/* 閉じるボタン */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
