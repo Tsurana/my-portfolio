@@ -1,8 +1,9 @@
 
 body {
     background-color: #ffffff;
-    margin: 0;
-    padding: 0;
+    margin: 0;/* ブラウザデフォルトの余白を消すこれがないと画面端に余白ができる */
+    padding: 0;/* ブラウザデフォルトの余白を消す　文字や画像の隙間を消す */
+    /* ブラウザは最初からデフォルトの余白があるので消すために行う */
 }
 ul {
     display: flex;       /* 横に並べる魔法 */
@@ -41,6 +42,18 @@ main {
     margin: 0 auto;  /* 幅を制限したときに、中身を中央に寄せる */
 }
 
+/* セクション間の余白を大きくして読みやすくする */
+main > section {
+    margin: 64px 0; /* 上下に大きめのスペースを確保 */
+    padding: 12px 0; /* 見出しとコンテンツの余白を調整 */
+}
+
+
+/* Programming と Illustrations の間隔を明示的に広げる */
+#works .works-group + .works-group {
+    margin-top: 100px; /* 2つ目のグループの上に余白を追加 */
+}
+
 /* 作品グループごとの設定 */
 .works-group {
     margin-bottom: 40px;
@@ -61,20 +74,7 @@ main {
     border: 1px solid #ddd;
 }
 
-/* イラストを並べる箱の設定 */
-.illustration-gallery {
-    display: flex;       /* 横並びにする魔法 */
-    flex-wrap: wrap;     /* 画面端までいったら折り返す */
-    gap: 15px;           /* 画像と画像の間の隙間 */
-}
 
-/* 画像自体のサイズを整える */
-.illustration-gallery img {
-    width: 200px;        /* 横幅を固定 */
-    height: 200px;       /* 縦幅を固定 */
-    object-fit: cover;   /* 画像を歪ませずに正方形に切り抜く（pixiv風！） */
-    border-radius: 4px;  /* 少しだけ角を丸くする */
-}
 
 #contact {
     text-align: center; /* 中身を中央に寄せる */
@@ -85,10 +85,13 @@ main {
     margin-top: 10px;
 }
 
+.contact-message {
+    margin-bottom: -5px;
+}
+
 .contact-button {
     display: inline-block;
     padding: 10px 20px;
-    margin: 10px;
     background-color: #0032d4; /* メニューと同じ青色 */
     color: white;
     text-decoration: none;
@@ -102,15 +105,90 @@ main {
     transform: scale(1.1);    /* 少し大きくする */
 }
 
-/* イラストの1枚ずつの箱 */
-.illustration-gallery .work-item {
-    width: calc(50% - 10px); /* 50%から隙間分を引いた幅 */
+/* --- ここから新しく追加 --- */
+
+/* 横スクロールの外枠：バーを灰色に */
+.horizontal-scroll-wrapper {
+    overflow-x: auto;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
 }
 
-.illustration-gallery .work-item img {
-    width: 100%;  /* 箱の幅いっぱいに広げる */
-    height: auto; /* 高さは自動調整 */
-    aspect-ratio: 1 / 1; /* 正方形を維持 */
+/* スクロールバーのデザイン */
+.horizontal-scroll-wrapper::-webkit-scrollbar {
+    height: 10px;
+}
+
+.horizontal-scroll-wrapper::-webkit-scrollbar-track {
+    background: #e0e0e0; /* 灰色 */
+    border-radius: 10px;
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: #999999; /* 濃い灰色 */
+    border-radius: 10px;
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #727272; /* 濃い灰色 */
+    border-radius: 10px;
+}
+
+/* 1. ボタンを表示させる設定 */
+.horizontal-scroll-wrapper::-webkit-scrollbar-button {
+    display: block;  /* これがないと表示されません */
+    width: 16px;     /* 矢印のエリアの幅 */
+}
+
+/* 2. 左側の矢印 (◀) */
+.horizontal-scroll-wrapper::-webkit-scrollbar-button:horizontal:decrement:start {
+    display: block;
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23999999"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 3. 右側の矢印 (▶) */
+.horizontal-scroll-wrapper::-webkit-scrollbar-button:horizontal:increment:end {
+    display: block;
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23999999"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 中身の並び方 */
+.illustration-slider {
+    display: flex;
+    gap: 20px;
+}
+
+/* 3枚目の途中が見えるサイズ感 (42%) */
+.illustration-slider .work-item {
+    flex: 0 0 42%; 
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.illustration-slider img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer; /* クリックできることを示す */
+}
+
+/* 右端のもっと見るボタン */
+.more-item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.more-button {
+    background: #f0f0f0;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    font-size: 0.9rem;
 }
 
 /* モーダル全体の背景（最初は非表示） */
@@ -153,4 +231,79 @@ main {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* Illustrationsのリンクだけに適用される設定 */
+.works-group h3 {
+    color: #111827; /* Programming と同じ色に統一 */
+    font-weight: bold;
+}
+
+/* 見出しの下に表示される細いバー（特定のセクション用） */
+#about h2::after,
+#works h2::after,
+#contact h2::after {
+    content: "";
+    display: block;
+    width: 100%; /* 見出しの下で右端まで広げる */
+    height: 4px;
+    background: linear-gradient(90deg, #1946d8 0%, #0032d4 100%);
+    border-radius: 3px;
+    margin-top: 8px;
+}
+
+/* Programming と Illustrations の下に、同じ長さで細め・色違いのバー */
+.works-group:nth-of-type(1) h3::after,
+.works-group:nth-of-type(2) h3::after {
+    content: "";
+    display: block;
+    width: 100%; /* 見出し下で右端まで揃える */
+    height: 3px;  /* 少し細め */
+    border-radius: 3px;
+    margin-top: 6px;
+}
+.works-group:nth-of-type(1) h3::after {
+    background: #929292; /* Programming 用の青 */
+}
+.works-group:nth-of-type(2) h3::after {
+    background: #929292; /* Illustrations 用のオレンジ（gallery-link と合わせる） */
+}
+
+
+/* gallery.html などのメインコンテンツを中央に寄せる */
+main {
+    padding: 40px 20px; /* 上下に40px、左右に20pxの余白 */
+    max-width: 900px;   /* 横幅の最大値 */
+    margin: 0 auto;     /* 左右を自動(auto)にして中央配置にする */
+}
+
+/* ギャラリーを2列のタイル状にする */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 1:1の割合で2列に分ける */
+    gap: 15px;                             /* 画像同士の隙間 */
+    margin-top: 30px;
+}
+
+/* 画像の設定 */
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;    /* 正方形に統一（好みで消してもOK） */
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* 触ったときに少し浮く演出 */
+.gallery-item img:hover {
+    transform: scale(1.02);
+}
+
+/* ホームに戻るボタンを少し目立たせる */
+.back-home {
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 1rem;
+    color: #666;
 }
