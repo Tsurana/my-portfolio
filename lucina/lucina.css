@@ -1,0 +1,66 @@
+/* ルキナ攻略用CSS */
+:root {
+    --lucina-blue: #2c52ed;
+    --dark-bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-white: #e0e0e0;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ヘッダー周り */
+.lucina-header {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.lucina-header h1 span {
+    font-size: 0.5em;
+    color: var(--lucina-blue);
+    display: block;
+}
+.lucina-header p span {
+    font-size: 0.8em;
+    color: #b8ac02;
+    display: block;
+}
+
+
+/* 検索ボックス */
+#strategySearch {
+    width: 80%;
+    max-width: 400px;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: #333;
+    color: white;
+}
+
+/* ナビゲーションカード */
+.strategy-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.nav-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-card:hover {
+    border-color: var(--lucina-blue);
+    transform: translateY(-5px);
+}
