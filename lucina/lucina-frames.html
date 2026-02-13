@@ -47,8 +47,25 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
+    <div class="strategy-notes" style="margin-top: 30px; line-height: 1.8;">
+        
+        <p>＊空中技の発生フレームには、ジャンプ踏切のフレーム（3F）は考慮していません</p>
+        <h3>💡 基礎テクニック・知識</h3>
+        
+        <p><strong>■ フレームの基礎知識</strong><br>
+        シールドの発生は全キャラ共通で 1F です。ガード硬直解除は 11F かかりますが、<strong>上スマッシュ、上B（ドルフィン）、ジャンプ、つかみ、アイテム投げ</strong> でキャンセルして出すことができます。</p>
+
+        <p><strong>■ ガーキャン行動の重要性</strong><br>
+        ルキナにとって、ガードからの反撃（ガーキャン）は非常に有効です。特に「上B（ドルフィン）」は発生 5F で無敵付きという最強技なので、相手の甘えた技にしっかりリターンをとっていきましょう。</p>
+
+        <p><strong>■ 間合い管理</strong><br>
+        空中技を振る際は、着地隙を刈られないようにするため、先端を意識した。立ち回りが好ましいです。<br>
+        先端を相手に意識させ、空Nや空上、空前などでガードをめくることも重要です。
+        </p>
+
+    </div>
     <nav>
-    <a href="index.html">🏠 ポートフォリオTOPへ</a> | 
+    <a href="../index.html">🏠 ポートフォリオTOPへ</a> | 
     <a href="lucina.html">⚔️ ルキナ攻略TOPへ</a>
     </nav>
 
@@ -56,7 +73,7 @@
         
         $(document).ready(function() {
             // CSVファイルを読み込む
-            Papa.parse("lucina_data.csv", {
+            Papa.parse("lucina-data.csv", {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
@@ -65,20 +82,37 @@
                     let html = "";
 
                     data.forEach(row => {
-                        // 硬直差がマイナスなら赤くするなどの処理
-                        let onShieldClass = parseFloat(row["On Shield"]) < 0 ? "negative" : "";
-                        
-                        html += `<tr>
-                            <td>${row["Unnamed: 0"] || ""}</td>
-                            <td>${row["startup"] || "--"}</td>
-                            <td>${row["Frames End Lag"] || "--"}</td>
-                            <td class="${onShieldClass}">${row["On Shield"] || "--"}</td>
-                            <td>${row["Total Frames"] || "--"}</td>
-                            <td>${row["Landing Lag"] || "--"}</td>
-                            <td>${row["Base Damage"] || "--"}%</td>
-                            <td style="font-size: 0.8em;">${row["notes"] || ""}</td>
-                        </tr>`;
-                    });
+    // 1. 技名を取得（"waza" か "Unnamed: 0" か、一番左の列を探す）
+    let moveName = row["waza"] || row["Unnamed: 0"] || Object.values(row)[0] || "--";
+
+    // 2. 発生（startup）を数値化して並び替え用にする
+    let startupNum = parseFloat(row["startup"]);
+    if (isNaN(startupNum)) startupNum = 999; // 数値でない場合は一番後ろへ
+
+    // 3. 硬直差（On Shield）を数値化して並び替え用にする
+    let rawShield = row["On Shield"];
+    let shieldNum = parseFloat(rawShield);
+    
+    // 数値でない（--など）場合は、並び替え時に一番下に来るようにする
+    if (isNaN(shieldNum)) {
+        shieldNum = -999;
+    }
+
+    // マイナス値なら赤くするクラスを決定
+    let onShieldClass = (shieldNum < 0 && shieldNum > -900) ? "negative" : "";
+
+    html += `<tr>
+        <td>${moveName}</td>
+        <td data-order="${startupNum}">${row["startup"] || "--"}</td>
+        <td>${row["Frames End Lag"] || "--"}</td>
+        <td data-order="${shieldNum}" class="${onShieldClass}">${rawShield || "--"}</td>
+        <td>${row["Total Frames"] || "--"}</td>
+        <td>${row["Landing Lag"] || "--"}</td>
+        <td>${row["Base Damage"] || "--"}%</td>
+        <td style="font-size: 0.8em;">${row["notes"] || ""}</td>
+    </tr>`;
+});
+                    
 
                     document.getElementById("tableBody").innerHTML = html;
 
