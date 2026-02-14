@@ -1,20 +1,27 @@
-/* ルキナ攻略用CSS */
+/* =========================================
+   共通変数と基本設定
+   ========================================= */
 :root {
     --lucina-blue: #2c52ed;
+    --kill-red: #ff4757;
     --dark-bg: #121212;
     --card-bg: #1e1e1e;
     --text-white: #e0e0e0;
+    --text-gray: #aaa;
 }
 
 body {
     background-color: var(--dark-bg);
     color: var(--text-white);
-    font-family: sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 20px;
+    line-height: 1.6;
 }
 
-/* ヘッダー周り */
+/* =========================================
+   共通ヘッダー・ナビゲーション
+   ========================================= */
 .lucina-header {
     text-align: center;
     padding: 40px 0;
@@ -25,42 +32,295 @@ body {
     color: var(--lucina-blue);
     display: block;
 }
+
 .lucina-header p span {
     font-size: 0.8em;
     color: #b8ac02;
     display: block;
 }
 
-
-/* 検索ボックス */
-#strategySearch {
-    width: 80%;
-    max-width: 400px;
-    padding: 12px;
-    border-radius: 25px;
-    border: none;
-    background: #333;
-    color: white;
+/* 共通の戻るリンクなど */
+.back-link {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: 0.3s;
 }
 
-/* ナビゲーションカード */
+.back-link:hover {
+    color: var(--lucina-blue);
+}
+
+/* =========================================
+   メインメニュー・カードデザイン
+   ========================================= */
 .strategy-nav {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
     margin-top: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav-card {
     background: var(--card-bg);
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
     border: 1px solid #333;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    text-align: center;
 }
 
 .nav-card:hover {
     border-color: var(--lucina-blue);
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.nav-card h3 {
+    margin-top: 0;
+    color: #fff;
+}
+
+/* 検索ボックス */
+.search-container {
+    margin-top: 20px;
+}
+
+#strategySearch {
+    width: 80%;
+    max-width: 400px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background: #333;
+    color: white;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+#strategySearch:focus {
+    border-color: var(--lucina-blue);
+}
+
+/* =========================================
+   コンボページ専用スタイル
+   ========================================= */
+.combo-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2.section-title {
+    border-bottom: 2px solid var(--lucina-blue);
+    display: inline-block;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+}
+
+/* コンボカード */
+.combo-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.combo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border-color: var(--lucina-blue);
+}
+
+.combo-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    background: var(--lucina-blue);
+}
+
+.combo-card.kill-confirm::before {
+    background: var(--kill-red);
+}
+
+/* バッジとルート */
+.combo-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    background: #333;
+    color: #ccc;
+}
+
+.badge.percent { background: rgba(44, 82, 237, 0.2); color: #74b9ff; }
+.badge.kill { background: rgba(255, 71, 87, 0.2); color: #ff6b6b; }
+
+.combo-route {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 15px 0;
+    font-size: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.move-box {
+    background: linear-gradient(145deg, #252525, #1a1a1a);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    font-weight: bold;
+}
+
+.arrow {
+    color: var(--lucina-blue);
+    font-weight: bold;
+}
+
+.combo-desc {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* 文字の色を青にする */
+.blue {
+    color: #2c52ed; /* 明るめの青（低%バッジに近い色） */
+    font-weight: bold; /* 少し太くすると見やすくなります */
+}
+
+/* 文字の色を赤にする */
+.red {
+    color: #ff4757; /* 撃墜の赤（kill-confirmの線に近い色） */
+    font-weight: bold;
+}
+
+/* セットアップを書いていく場所です */
+
+/* =========================================
+   セットアップページ：独自のタクティカルデザイン
+   ========================================= */
+.setup-board {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* 状況ごとの大きな塊 */
+.tactical-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 60px;
+    border-left: 2px dashed #444;
+    padding-left: 30px;
+    position: relative;
+}
+
+/* 状況アイコンの丸 */
+.tactical-row::before {
+    content: "STRATEGY";
+    position: absolute;
+    left: -45px;
+    top: 0;
+    background: var(--lucina-blue);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 5px;
+    transform: rotate(-90deg);
+    transform-origin: left bottom;
+    border-radius: 2px;
+}
+
+/* 左側：状況とターゲット */
+.tactical-side {
+    flex: 1;
+    min-width: 250px;
+}
+
+.situation-header {
+    background: #252525;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 3px solid var(--lucina-blue);
+}
+
+.target-list {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+}
+
+/* 右側：具体的なアクション */
+.tactical-main {
+    flex: 2;
+    background: linear-gradient(145deg, #1e1e1e, #161616);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.action-step {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.step-num {
+    background: var(--lucina-blue);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* 相手の行動ラベルを「警告」っぽく */
+.enemy-action {
+    display: inline-block;
+    color: var(--kill-red);
+    border: 1px solid var(--kill-red);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 800px) {
+    .tactical-row { flex-direction: column; padding-left: 15px; }
+}
+
+
+/* セットアップ用の画像サイズ設定 */
+.setup-img {
+    width: 100%;          /* 基本は親要素に合わせる */
+    max-width: 500px;     /* ここ！好きな最大サイズ（ピクセル）を指定 */
+    height: auto;         /* 縦横比を崩さない */
+    display: block;       /* 前後の文字と被らないようにする */
+    margin: 15px 0;       /* 上下に少し隙間を作る */
+    border-radius: 10px;  /* 角を少し丸くするとおしゃれ */
+    border: 2px solid #333; /* 軽い枠線 */
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucina Combos - 確定コンボ集</title>
+    <link rel="stylesheet" href="lucina.css">
+</head>
+<body>
+    <header class="lucina-header">
+        <h1>LUCINA<span> Combo Route</span></h1>
+        <a href="lucina.html" class="back-link">← 戻る</a>
+    </header>
+
+    <main class="combo-container">
+    <h2 class="section-title">主要コンボ一覧</h2>
+    <p><span class = "blue">青</span>の表示は撃墜ではないという意味です。<span class >赤</span>が撃墜まで持ってけるコンボです。</p>
+
+    <div class="filter-controls" style="margin-bottom: 10px;">
+        <span style="font-size: 0.8em; color: #aaa; margin-right: 10px;">絞り込み:</span>
+        <button onclick="filterCombos('all')" class="badge" style="cursor:pointer; border:1px solid #444;">すべて</button>
+        <button onclick="filterCombos('低')" class="badge" style="cursor:pointer; border:1px solid #2c52ed;">低％</button>
+        <button onclick="filterCombos('中')" class="badge" style="cursor:pointer; border:1px solid #74b9ff;">中％</button>
+        <button onclick="filterCombos('高')" class="badge" style="cursor:pointer; border:1px solid #ff4757;">高％</button>
+    </div>
+
+    <div class="sort-controls" style="margin-bottom: 30px;">
+        <span style="font-size: 0.8em; color: #aaa; margin-right: 10px;">並び替え:</span>
+        <button onclick="filterCombos('all')" class="badge" style="cursor:pointer; border:1px solid #444;">デフォルト順</button>
+        <button onclick="sortCombos('practicality')" class="badge" style="cursor:pointer; border:1px solid #444;">実用度が高い順</button>
+    </div>
+
+    <div id="comboList"></div>
+</main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="lucina.js"></script>
+</body>
+</html>
