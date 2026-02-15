@@ -324,3 +324,60 @@ h2.section-title {
     border-radius: 10px;  /* 角を少し丸くするとおしゃれ */
     border: 2px solid #333; /* 軽い枠線 */
 }
+
+/* 特有テクニックのとこ */
+/* =========================================
+   テクニックページ専用
+   ========================================= */
+.tech-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+
+.tech-section {
+    background: #1a1a1a;
+    border-left: 4px solid var(--lucina-blue);
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.tech-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+.tech-id { color: var(--lucina-blue); font-weight: bold; font-family: monospace; }
+.tech-header h2 { margin: 0; font-size: 1.4rem; color: #fff; }
+
+.command-box {
+    background: #000;
+    padding: 10px 20px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+}
+
+.key {
+    background: #444;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 0 #000;
+}
+
+.tech-explanation ul {
+    padding-left: 20px;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.tech-explanation li { margin-bottom: 8px; }
+
+/* 画像　tech */
+/* テクニックページ内の画像設定 */
+.tech-img {
+    display: block;      /* 文字のすぐ下に配置 */
+    width: 100%;
+    max-width: 400px;    /* セットアップより少し小さめがおすすめ */
+    height: auto;
+    margin: 10px 0 20px 0; /* 下に余裕を持たせて次の項目と離す */
+    border-radius: 6px;
+    border: 1px solid #444;
+}
