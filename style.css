@@ -1,32 +1,44 @@
 
 body {
-    background-color: #ffffff;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    color: #333;
+    line-height: 1.8;
     margin: 0;/* ブラウザデフォルトの余白を消すこれがないと画面端に余白ができる */
     padding: 0;/* ブラウザデフォルトの余白を消す　文字や画像の隙間を消す */
     /* ブラウザは最初からデフォルトの余白があるので消すために行う */
 }
+/* なにここ */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* 背景をぼかす（超重要！） */
+    border-bottom: 1px solid #eee;
+}
+
 ul {
     display: flex;       /* 横に並べる魔法 */
     list-style: none;    /* 黒丸を消す */
-    background-color: #0032d4; /* 任天堂風の赤 */
     padding: 20px 0;
     justify-content: space-around; /* 均等配置 */
     margin: 0;           /* デフォルトの余白を消す */
+    background-color: transparent; /* 透明にする */
 }
 html {
     scroll-behavior: smooth;
 }
 a {
-    color: rgb(131, 131, 131);        /* 文字を白く */
     text-decoration: none; /* 下線を消す */
     /* 3. 文字を大きく、太くする */
     font-size: 1.2rem;   /* 標準より少し大きく */
     font-weight: bold;   /* 太字にする */
+    color: #333; /* 文字を黒系に */
 }
 
 /* マウスを乗せた（ホバーした）ときの色の設定 */
 a:hover {
-    color: #ffffff; /* 例えばゴールドのような色に変える */
+    color: #530000; /* 例えばゴールドのような色に変える */
     text-decoration: underline; /* 下線を出してみる */
     transition: 0.3s; /* 0.3秒かけてふわっと変える */
 }
@@ -319,6 +331,21 @@ main {
     margin-top: 40px;
     font-size: 1rem;
     color: #666;
+}
+
+
+/* 奥行 */
+.project-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* ほんのり影 */
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* 浮き上がる演出 */
 }
 
 
